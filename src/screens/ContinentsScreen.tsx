@@ -6,7 +6,7 @@ export default function ContinentsScreen({ route, navigation }: any) {
         <View>
             <Text>ContinentsScreen</Text>
             <Button
-                onPress={() => navigation.navigate('CountryDetails')}
+                onPress={() => navigation.navigate('Countries')}
                 title="Country"
             />
         </View>

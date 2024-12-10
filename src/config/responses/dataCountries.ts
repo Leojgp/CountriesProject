@@ -1,6 +1,4 @@
 
-
-
 export interface CountriesResponse {
     name: Name;
     tld?: string[];
