@@ -1,21 +1,20 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from './screens/HomeScreen';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ContinentsScreen from './screens/ContinentsScreen';
+import CountriesScreen from './screens/CountriesScreen';
+import CountryDetailsScreen from './screens/CountryDetailsScreen';
 
-type RootStackParamList = {
-  Home: undefined;
-  Details: undefined;
-};
-
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} options={{title: 'Home'}} />
+      <Stack.Navigator initialRouteName="Continents">
+        <Stack.Screen name="Continents" component={ContinentsScreen} />
+        <Stack.Screen name="Countries" component={CountriesScreen} />
+        <Stack.Screen name="CountryDetails" component={CountryDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
