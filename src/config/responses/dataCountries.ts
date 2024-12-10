@@ -1,48 +1,51 @@
-export interface ContinentResponse {
-    name:         Name;
-    tld?:         string[];
-    cca2:         string;
-    ccn3?:        string;
-    cca3:         string;
-    cioc?:        string;
+
+
+
+export interface CountriesResponse {
+    name: Name;
+    tld?: string[];
+    cca2: string;
+    ccn3?: string;
+    cca3: string;
     independent?: boolean;
-    status:       Status;
-    unMember:     boolean;
-    currencies:   { [key: string]: Currency };
-    idd:          Idd;
-    capital:      string[];
+    status: Status;
+    unMember: boolean;
+    currencies?: { [key: string]: Currency };
+    idd: Idd;
+    capital?: string[];
     altSpellings: string[];
-    region:       Region;
-    subregion:    Subregion;
-    languages:    { [key: string]: string };
+    region: Region;
+    languages?: { [key: string]: string };
     translations: { [key: string]: Translation };
-    latlng:       number[];
-    landlocked:   boolean;
-    borders?:     string[];
-    area:         number;
-    demonyms:     Demonyms;
-    flag:         string;
-    maps:         Maps;
-    population:   number;
-    gini?:        { [key: string]: number };
-    fifa?:        string;
-    car:          Car;
-    timezones:    string[];
-    continents:   Region[];
-    flags:        Flags;
-    coatOfArms:   CoatOfArms;
-    startOfWeek:  StartOfWeek;
-    capitalInfo:  CapitalInfo;
-    postalCode?:  PostalCode;
+    latlng: number[];
+    landlocked: boolean;
+    area: number;
+    demonyms?: Demonyms;
+    flag: string;
+    maps: Maps;
+    population: number;
+    car: Car;
+    timezones: string[];
+    continents: Continent[];
+    flags: Flags;
+    coatOfArms: CoatOfArms;
+    startOfWeek: StartOfWeek;
+    capitalInfo: CapitalInfo;
+    cioc?: string;
+    subregion?: string;
+    fifa?: string;
+    borders?: string[];
+    gini?: { [key: string]: number };
+    postalCode?: PostalCode;
 }
 
 export interface CapitalInfo {
-    latlng: number[];
+    latlng?: number[];
 }
 
 export interface Car {
-    signs: string[];
-    side:  Side;
+    signs?: string[];
+    side: Side;
 }
 
 export enum Side {
@@ -55,18 +58,23 @@ export interface CoatOfArms {
     svg?: string;
 }
 
-export enum Region {
+export enum Continent {
+    Africa = "Africa",
+    Antarctica = "Antarctica",
     Asia = "Asia",
     Europe = "Europe",
+    NorthAmerica = "North America",
+    Oceania = "Oceania",
+    SouthAmerica = "South America",
 }
 
 export interface Currency {
-    name:   string;
+    name: string;
     symbol: string;
 }
 
 export interface Demonyms {
-    eng:  Eng;
+    eng: Eng;
     fra?: Eng;
 }
 
@@ -76,39 +84,50 @@ export interface Eng {
 }
 
 export interface Flags {
-    png:  string;
-    svg:  string;
+    png: string;
+    svg: string;
     alt?: string;
 }
 
 export interface Idd {
-    root:     string;
-    suffixes: string[];
+    root?: string;
+    suffixes?: string[];
 }
 
 export interface Maps {
-    googleMaps:     string;
+    googleMaps: string;
     openStreetMaps: string;
 }
 
 export interface Name {
-    common:     string;
-    official:   string;
-    nativeName: { [key: string]: Translation };
+    common: string;
+    official: string;
+    nativeName?: { [key: string]: Translation };
 }
 
 export interface Translation {
     official: string;
-    common:   string;
+    common: string;
 }
 
 export interface PostalCode {
     format: string;
-    regex:  string;
+    regex?: string;
+}
+
+export enum Region {
+    Africa = "Africa",
+    Americas = "Americas",
+    Antarctic = "Antarctic",
+    Asia = "Asia",
+    Europe = "Europe",
+    Oceania = "Oceania",
 }
 
 export enum StartOfWeek {
     Monday = "monday",
+    Saturday = "saturday",
+    Sunday = "sunday",
 }
 
 export enum Status {
@@ -116,11 +135,6 @@ export enum Status {
     UserAssigned = "user-assigned",
 }
 
-export enum Subregion {
-    CentralEurope = "Central Europe",
-    EasternEurope = "Eastern Europe",
-    NorthernEurope = "Northern Europe",
-    SoutheastEurope = "Southeast Europe",
-    SouthernEurope = "Southern Europe",
-    WesternEurope = "Western Europe",
+export interface CountryData {
+    countries: CountriesResponse[];
 }
