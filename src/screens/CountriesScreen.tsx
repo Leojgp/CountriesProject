@@ -1,11 +1,10 @@
 import React from "react";
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import { useCountries } from "../hooks/useCountries";
+import CountryCard from "./components/CountryCard";
 
 
-
-
-export default function CountriesScreen({ route }: any) {
+export default function CountriesScreen({ route, navigation }: any) {
     const { continentName } = route.params;
     const { countries, loading } = useCountries(continentName);
 
@@ -26,40 +25,43 @@ export default function CountriesScreen({ route }: any) {
         );
     }
 
+    const handleCountryPress = (country: any) => {
+        navigation.navigate("CountryDetails", { country });
+    };
+
     return (
         <View style={styles.container}>
             <FlatList
                 data={countries}
-                keyExtractor={(item) => item.name} 
+                keyExtractor={(item) => item.name}
                 renderItem={({ item }) => (
-                    <View style={styles.item}>
-                        <Text>{item.name}</Text>
-                    </View>
+                    <CountryCard
+                        name={item.name}
+                        //capital={item.capital}
+                        flag={item.flag}
+                        //languages={item.languages}
+                        onPress={() => handleCountryPress(item)}
+                    />
                 )}
             />
         </View>
     );
 }
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
+        backgroundColor: "#f8f9fa",
     },
     loadingContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
     },
     emptyContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    item: {
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        justifyContent: "center",
+        alignItems: "center",
     },
 });
