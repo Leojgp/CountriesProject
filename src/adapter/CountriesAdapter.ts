@@ -5,12 +5,12 @@ import { HttpError } from "./http/HttpError";
 import { Country } from "../config/entities/Country";
 
 export class CountriesAdapter {
-    static async getCountries(): Promise<Country[] | null> {
+    static async getCountries(continent:string): Promise<Country[] | null> {
         const http = new HttpAxios(Config.countriesAPI);
     
         try {
           // Obtener datos de países
-          const countriesList = await http.getCountries("asia");
+          const countriesList = await http.getCountries(continent);
     
           // Manejo de errores
           if (countriesList instanceof HttpError) {
@@ -18,11 +18,10 @@ export class CountriesAdapter {
             return [];
           }
     
-          // Mapeo de países
           const mappedCountries = countriesList.map(countriesMapper);
     
           console.log(mappedCountries);
-          return mappedCountries; // Devuelve la lista mapeada si es necesario
+          return mappedCountries; 
         } catch (error) {
           console.error("Unexpected error:", error);
           return [];

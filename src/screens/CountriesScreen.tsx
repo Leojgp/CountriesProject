@@ -2,8 +2,12 @@ import React from "react";
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import { useCountries } from "../hooks/useCountries";
 
-export default function CountriesScreen() {
-    const { countries, loading } = useCountries();
+
+
+
+export default function CountriesScreen({ route }: any) {
+    const { continentName } = route.params;
+    const { countries, loading } = useCountries(continentName);
 
     if (loading) {
         return (
@@ -26,7 +30,7 @@ export default function CountriesScreen() {
         <View style={styles.container}>
             <FlatList
                 data={countries}
-                keyExtractor={(item) => item.name} // Usamos `item.name` que es un string
+                keyExtractor={(item) => item.name} 
                 renderItem={({ item }) => (
                     <View style={styles.item}>
                         <Text>{item.name}</Text>
