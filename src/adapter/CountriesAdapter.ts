@@ -20,7 +20,6 @@ export class CountriesAdapter {
     
           const mappedCountries = countriesList.map(countriesMapper);
     
-          console.log(mappedCountries);
           return mappedCountries; 
         } catch (error) {
           console.error("Unexpected error:", error);

@@ -8,6 +8,7 @@ export const countriesMapper = (item: CountriesResponse): Country => {
         continent: item.region,
         capital: item.capital ? item.capital : [],
         languages: languages,
+        population: item.population,
         flag: item.flags.png,
         latlng: item.latlng || [],
     };

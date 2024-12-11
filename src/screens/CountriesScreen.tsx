@@ -1,43 +1,36 @@
 import React from "react";
-import { View, Text, FlatList, ActivityIndicator, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import { useCountries } from "../hooks/useCountries";
 import CountryCard from "./components/CountryCard";
 
-
 export default function CountriesScreen({ route, navigation }: any) {
     const { continentName } = route.params;
-    const { countries, loading } = useCountries(continentName);
-
-    if (loading) {
-        return (
-            <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" color="#0000ff" />
-                <Text>Loading countries...</Text>
-            </View>
-        );
-    }
+    const { countries } = useCountries(continentName);
 
     if (!countries || countries.length === 0) {
         return (
             <View style={styles.emptyContainer}>
-                <Text>No countries available</Text>
+                <Text style={styles.emptyText}>No countries available</Text>
             </View>
         );
     }
 
     const handleCountryPress = (country: any) => {
-        const { name, capital, flag, languages, latlng } = country;
-        navigation.navigate("CountryDetails", { 
-            name, 
-            capital, 
-            flag, 
-            language: languages, 
-            latlng 
-          });
+        const { name, continent, capital, flag, languages, population, latlng } = country;
+        navigation.navigate("CountryDetails", {
+            name,
+            continent,
+            capital,
+            flag,
+            language: languages,
+            population,
+            latlng
+        });
     };
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>Countries in {continentName}</Text>
             <FlatList
                 data={countries}
                 keyExtractor={(item) => item.name}
@@ -50,6 +43,7 @@ export default function CountriesScreen({ route, navigation }: any) {
                         onPress={() => handleCountryPress(item)}
                     />
                 )}
+                contentContainerStyle={styles.listContainer}
             />
         </View>
     );
@@ -58,17 +52,30 @@ export default function CountriesScreen({ route, navigation }: any) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
-        backgroundColor: "#f8f9fa",
+        paddingTop: 20,
+        backgroundColor: "#f4f6f9",  
+        paddingHorizontal: 15,
     },
-    loadingContainer: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+    title: {
+        fontSize: 28,
+        fontWeight: "bold",
+        textAlign: "center",
+        color: "#333",
+        marginBottom: 20,
     },
     emptyContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#fff",
+        paddingHorizontal: 15,
+    },
+    emptyText: {
+        fontSize: 18,
+        color: "#888",  
+        fontWeight: "400",
+    },
+    listContainer: {
+        paddingBottom: 20, 
     },
 });
