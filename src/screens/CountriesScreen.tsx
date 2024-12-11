@@ -37,9 +37,9 @@ export default function CountriesScreen({ route, navigation }: any) {
                 renderItem={({ item }) => (
                     <CountryCard
                         name={item.name}
-                        //capital={item.capital}
+                        capital={item.capital}
                         flag={item.flag}
-                        //languages={item.languages}
+                        languages={item.languages}
                         onPress={() => handleCountryPress(item)}
                     />
                 )}

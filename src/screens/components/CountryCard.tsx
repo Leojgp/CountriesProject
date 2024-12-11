@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-export default function CountryCard({ name, capital, flag, language, onPress }: any) {
+export default function CountryCard({ name, capital, flag, languages, onPress }: any) {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image source={{ uri: flag }} style={styles.flag} />
-      <View style={styles.info}>
+      <View style={styles.info}>    
         <Text style={styles.name}>{name}</Text>
         <Text>Capital: {capital}</Text>
-        <Text>Language: {language}</Text>
+        <Text>Language:  {languages.join(', ')}</Text>
       </View>
     </TouchableOpacity>
   );
