@@ -26,7 +26,14 @@ export default function CountriesScreen({ route, navigation }: any) {
     }
 
     const handleCountryPress = (country: any) => {
-        navigation.navigate("CountryDetails", { country });
+        const { name, capital, flag, languages, latlng } = country;
+        navigation.navigate("CountryDetails", { 
+            name, 
+            capital, 
+            flag, 
+            language: languages, 
+            latlng 
+          });
     };
 
     return (
