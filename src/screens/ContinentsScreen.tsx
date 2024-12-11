@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, FlatList, Text, View, Button } from 'react-native';
 
 const continents = [
-    { name: 'Africa', key: 'africa' },
-    { name: 'Asia', key: 'asia' },
-    { name: 'Europe', key: 'europe' },
-    { name: 'America', key: 'america' },
-    { name: 'Oceania', key: 'oceania' },
+  { name: 'Africa' },
+  { name: 'Asia' },
+  { name: 'Europe' },
+  { name: 'America' },
+  { name: 'Oceania' },
 ];
 
 export default function ContinentsScreen({ navigation }: any) {
@@ -14,11 +14,11 @@ export default function ContinentsScreen({ navigation }: any) {
         navigation.navigate('Countries', { continentName });
     };
 
-    const renderItem = ({ item }: { item: { name: string; key: string } }) => (
+    const renderItem = ({ item }: { item: { name: string } }) => (
         <View style={styles.listItem}>
             <Button
                 title={item.name}
-                onPress={() => navigateToCountries(item.key)}
+                onPress={() => navigateToCountries(item.name)}
                 color="#007BFF"
             />
         </View>
@@ -30,7 +30,7 @@ export default function ContinentsScreen({ navigation }: any) {
             <FlatList
                 data={continents}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.key}
+                keyExtractor={(item) => item.name}
                 contentContainerStyle={styles.list}
             />
         </View>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     },
     list: {
         width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     listItem: {
         width: '70%',
