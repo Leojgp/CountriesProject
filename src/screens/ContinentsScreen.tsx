@@ -1,13 +1,8 @@
 import React from 'react';
 import { StyleSheet, FlatList, Text, View, Button } from 'react-native';
+import { Region } from '../config/responses/dataCountries';
 
-const continents = [
-  { name: 'Africa' },
-  { name: 'Asia' },
-  { name: 'Europe' },
-  { name: 'America' },
-  { name: 'Oceania' },
-];
+const continents = Object.values(Region).map(region => ({ name: region }));
 
 export default function ContinentsScreen({ navigation }: any) {
     const navigateToCountries = (continentName: string) => {
