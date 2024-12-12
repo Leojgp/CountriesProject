@@ -5,7 +5,15 @@ import CountryCard from "./components/CountryCard";
 
 export default function CountriesScreen({ route, navigation }: any) {
     const { continentName } = route.params;
-    const { countries } = useCountries(continentName);
+    const { countries, loading} = useCountries(continentName);
+
+    if (loading) {
+        return (
+            <View style={styles.loadingContainer}>
+                <Text>Loading countries...</Text>
+            </View>
+        );
+    }
 
     if (!countries || countries.length === 0) {
         return (
@@ -77,5 +85,10 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         paddingBottom: 20, 
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
     },
 });
